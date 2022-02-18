@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Navigation } from "../../components/Navigation";
 import { config } from "../../config/config";
 
 export const AtranWeightTable = () => {
@@ -53,6 +54,7 @@ export const AtranWeightTable = () => {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(config.atran.all_actf_dow);
+      data.forEach((el) => (el.fak = 0));
       setState(data);
     }
     fetchData();
@@ -61,7 +63,7 @@ export const AtranWeightTable = () => {
   return (
     <Box>
       <Heading mb="4" size="xl" align="center">
-        Atran DOW
+        Расчет DOW
       </Heading>
       <Table>
         <TableCaption>Расчет DOW</TableCaption>
@@ -100,6 +102,7 @@ export const AtranWeightTable = () => {
               <Td>
                 <Input
                   //   value={acft.fak}
+                  defaultValue={acft.fak}
                   width="65px"
                   type="number"
                   onChange={(e) => {
