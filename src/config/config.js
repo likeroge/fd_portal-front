@@ -5,7 +5,7 @@ export const config = {
     all_actf_dow: "https://fdops.ru/api/v1/atran/dow",
   },
   //   findAcftUrl: "http://localhost:5001/api/v1/aircraft/find",
-  findAcftUrl: "http://fdops.ru/api/v1/aircraft/find",
+  findAcftUrl: "https://fdops.ru/api/v1/aircraft/find",
   //   addAcftDataUrl: "http://localhost:5001/api/v1/aircraft/add",
-  addAcftDataUrl: "http://fdops.ru/api/v1/aircraft/add",
+  addAcftDataUrl: "https://fdops.ru/api/v1/aircraft/add",
 };
