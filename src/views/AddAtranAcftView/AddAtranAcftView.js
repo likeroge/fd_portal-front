@@ -73,7 +73,7 @@ export const AddAtranAcftView = () => {
         <Input onChange={(e) => setWater(e.target.value)} value={water} />
         <FormLabel>DOW</FormLabel>
         <Input onChange={(e) => setOew(e.target.value)} value={oew} />
-        <FormLabel>Стандартный FAK</FormLabel>
+        <FormLabel>Текущий FAK</FormLabel>
         <Input onChange={(e) => setFak(e.target.value)} value={fak} />
       </FormControl>
     </Box>

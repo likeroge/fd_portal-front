@@ -8,4 +8,6 @@ export const config = {
   findAcftUrl: "https://fdops.ru/api/v1/aircraft/find",
   //   addAcftDataUrl: "http://localhost:5001/api/v1/aircraft/add",
   addAcftDataUrl: "https://fdops.ru/api/v1/aircraft/add",
+  // saveAtranAcftState: "http://localhost:5001/api/v1/aircraft/atran-state",
+  saveAtranAcftState: "https://fdops.ru/api/v1/aircraft/atran-state",
 };

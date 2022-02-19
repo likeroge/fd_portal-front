@@ -17,6 +17,9 @@ export const Navigation = () => {
       <TabList>
         <Tab onClick={() => navigate("/atran/dow")}>АТРАН DOW</Tab>
         <Tab onClick={() => navigate("/acft")}>Данные ВС</Tab>
+        <Tab onClick={() => navigate("/ofp/get-airports")}>
+          ICAO коды из OFP
+        </Tab>
       </TabList>
     </Tabs>
 
