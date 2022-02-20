@@ -25,6 +25,9 @@ export const OFPparserView = () => {
     try {
       //   const rawDepAltnArray = [...text.match(/TKFAL\s+\w\w\w\/\w\w\w\w/)];
       const rawDepAltnArray = [...text.match(/TKFAL\s+(.*)\n+/)][1].slice(4);
+      if (rawDepAltnArray[0] === "." && rawDepAltnArray[1] === ".") {
+        return "";
+      }
       return rawDepAltnArray;
     } catch (err) {
       return "";
