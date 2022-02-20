@@ -21,6 +21,16 @@ export const OFPparserView = () => {
     return altnIcaoCodesArray;
   };
 
+  const getTkofAltn = (text) => {
+    try {
+      //   const rawDepAltnArray = [...text.match(/TKFAL\s+\w\w\w\/\w\w\w\w/)];
+      const rawDepAltnArray = [...text.match(/TKFAL\s+(.*)\n+/)][1].slice(4);
+      return rawDepAltnArray;
+    } catch (err) {
+      return "";
+    }
+  };
+
   const getEtpAirportsArray = (text) => {
     let etpArray = [];
     try {
@@ -61,15 +71,17 @@ export const OFPparserView = () => {
     const depAirport = getDepArrAirportArray(ofpText)[0];
     const arrAirport = getDepArrAirportArray(ofpText)[1];
     const eraAirport = getEraAirport(ofpText);
+    const depAltnAirport = getTkofAltn(ofpText);
 
-    console.log(etpArray);
+    console.log(depAltnAirport);
 
     resultArray.push(
       ...altnArray,
       ...etpArray,
       depAirport,
       arrAirport,
-      eraAirport
+      eraAirport,
+      depAltnAirport
     );
     resultArray = Array.from(new Set(resultArray));
     setIcaoCodes("SA FT FC " + resultArray.join(" "));
