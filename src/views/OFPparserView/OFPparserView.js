@@ -27,10 +27,10 @@ export const OFPparserView = () => {
       const rawArray = [...text.matchAll(/ETP\d\s+\w+\/\w+/g)].map(
         (rawAltn) => rawAltn[0]
       );
-      const etpIcaoCodesArray = rawArray
-        .map((el) => el.slice(9, 24))
-        .map((etpPair) => etpPair.split("/"))
-        .map((arr) => etpArray.push(...arr));
+      rawArray
+        .map((el) => el.match(/\w+\/\w+/)[0])
+        .map((el) => el.split("/"))
+        .map((el) => etpArray.push(...el));
       return Array.from(new Set(etpArray));
     } catch (error) {
       return [];
@@ -61,6 +61,9 @@ export const OFPparserView = () => {
     const depAirport = getDepArrAirportArray(ofpText)[0];
     const arrAirport = getDepArrAirportArray(ofpText)[1];
     const eraAirport = getEraAirport(ofpText);
+
+    console.log(etpArray);
+
     resultArray.push(
       ...altnArray,
       ...etpArray,
@@ -69,8 +72,8 @@ export const OFPparserView = () => {
       eraAirport
     );
     resultArray = Array.from(new Set(resultArray));
-    setIcaoCodes(resultArray.join(" "));
-    console.log(resultArray);
+    setIcaoCodes("SA FT FC " + resultArray.join(" "));
+    // console.log(resultArray);
   };
 
   const onClearButton = () => {
