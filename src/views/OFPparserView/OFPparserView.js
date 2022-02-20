@@ -51,10 +51,15 @@ export const OFPparserView = () => {
   };
 
   const getDepArrAirportArray = (text) => {
-    const rawDepArray = text.match(/RTE\s+\w+\/\w+\s+\w+\/\w+/)[0];
-    const depAirport = rawDepArray.slice(4, 8);
-    const arrAirport = rawDepArray.slice(18, 22);
-    return [depAirport, arrAirport];
+    const rawDepArray = text
+      .match(/RTE\s+\w+\/\w+\s+\w+\/\w+/)[0]
+      .matchAll(/\w\w\w\w/g);
+
+    const depArrArray = [...rawDepArray].map((el) => el[0]);
+    // const depAirport = rawDepArray.slice(4, 8);
+    // const arrAirport = rawDepArray.slice(18, 22);
+    // return [depAirport, arrAirport];
+    return depArrArray;
   };
 
   const getEraAirport = (text) => {
@@ -76,7 +81,7 @@ export const OFPparserView = () => {
     const eraAirport = getEraAirport(ofpText);
     const depAltnAirport = getTkofAltn(ofpText);
 
-    console.log(depAltnAirport);
+    // console.log(getDepArrAirportArray(ofpText));
 
     resultArray.push(
       ...altnArray,
