@@ -148,7 +148,7 @@ export const OFPparserView = () => {
         <Spacer />
 
         <Button onClick={onClearButton} colorScheme="red" w="40">
-          Стереть
+          Новый запрос
         </Button>
       </Flex>
       <FormLabel>ICAO коды</FormLabel>
