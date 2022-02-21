@@ -91,14 +91,37 @@ export const OFPparserView = () => {
       eraAirport,
       depAltnAirport
     );
-    resultArray = Array.from(new Set(resultArray));
-    setIcaoCodes("SA FT FC " + resultArray.join(" "));
-    // console.log(resultArray);
+    // resultArray = Array.from(new Set(resultArray));
+    // setIcaoCodes("SA FT FC " + resultArray.join(" "));
+    setIcaoCodes((prev) => {
+      let newState = "";
+      if (prev.length !== 0) {
+        newState = prev.slice(9);
+        newState = newState.split(" ");
+        newState = [...newState, ...resultArray];
+        newState = Array.from(new Set(newState));
+        newState = newState.filter((el) => el !== "");
+        newState = "SA FT FC " + newState.join(" ");
+        navigator.clipboard.writeText(newState);
+        return newState;
+      } else {
+        resultArray = Array.from(new Set(resultArray));
+        newState = resultArray.filter((el) => el !== "");
+        newState = "SA FT FC " + resultArray.join(" ");
+        navigator.clipboard.writeText(newState);
+        return newState;
+      }
+    });
   };
 
   const onClearButton = () => {
     setOfpText("");
     setIcaoCodes("");
+  };
+
+  const addOfp = () => {
+    setOfpText("");
+    // parseOFP(ofpText);
   };
 
   return (
@@ -118,6 +141,12 @@ export const OFPparserView = () => {
           Сформировать
         </Button>
         <Spacer />
+
+        <Button onClick={addOfp} colorScheme="green" w="40">
+          Добавить OFP
+        </Button>
+        <Spacer />
+
         <Button onClick={onClearButton} colorScheme="red" w="40">
           Стереть
         </Button>

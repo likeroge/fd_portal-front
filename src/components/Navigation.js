@@ -20,6 +20,7 @@ export const Navigation = () => {
         <Tab onClick={() => navigate("/ofp/get-airports")}>
           ICAO коды из OFP
         </Tab>
+        {/* <Tab onClick={() => navigate("/ofp/get-dla")}>DLA messages</Tab> */}
       </TabList>
     </Tabs>
 
