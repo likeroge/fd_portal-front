@@ -15,7 +15,7 @@ export const OFPparserView = () => {
   const [icaoCodes, setIcaoCodes] = useState("");
 
   const getAltnIcaoArray = (text) => {
-    const rawAltnArray = [...text.matchAll(/AL\d\s\s+\w+\/\w+/g)];
+    const rawAltnArray = [...text.matchAll(/AL\d\s+\w+\/\w+/g)];
     const rawIcaoCodesArray = rawAltnArray.map((rawAltn) => rawAltn[0]);
     const altnIcaoCodesArray = rawIcaoCodesArray.map((el) => el.slice(12, 17));
     return altnIcaoCodesArray;
@@ -74,23 +74,26 @@ export const OFPparserView = () => {
   const parseOFP = (ofpText) => {
     let resultArray = [];
     console.log("Parsing process");
+    const depAirport = getDepArrAirportArray(ofpText)[0];
+    const depAltnAirport = getTkofAltn(ofpText);
+    const arrAirport = getDepArrAirportArray(ofpText)[1];
+
     const altnArray = getAltnIcaoArray(ofpText);
     const etpArray = getEtpAirportsArray(ofpText);
-    const depAirport = getDepArrAirportArray(ofpText)[0];
-    const arrAirport = getDepArrAirportArray(ofpText)[1];
     const eraAirport = getEraAirport(ofpText);
-    const depAltnAirport = getTkofAltn(ofpText);
 
     // console.log(getDepArrAirportArray(ofpText));
 
     resultArray.push(
+      depAirport,
+      depAltnAirport,
+      arrAirport,
       ...altnArray,
       ...etpArray,
-      depAirport,
-      arrAirport,
-      eraAirport,
-      depAltnAirport
+      eraAirport
     );
+
+    // resultArray.forEach((el) => el.replace(/\s/g, ""));
     // resultArray = Array.from(new Set(resultArray));
     // setIcaoCodes("SA FT FC " + resultArray.join(" "));
     setIcaoCodes((prev) => {
@@ -107,7 +110,7 @@ export const OFPparserView = () => {
       } else {
         resultArray = Array.from(new Set(resultArray));
         newState = resultArray.filter((el) => el !== "");
-        newState = "SA FT FC " + resultArray.join(" ");
+        newState = "SA FT FC " + newState.join(" ");
         navigator.clipboard.writeText(newState);
         return newState;
       }
