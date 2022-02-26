@@ -56,7 +56,11 @@ export const AddAtranAcftView = () => {
       </Heading>
       <FormControl>
         <FormLabel>Бортовой номер ВС</FormLabel>
-        <Input mb="4" onChange={(e) => setTail(e.target.value)} value={tail} />
+        <Input
+          mb="4"
+          onChange={(e) => setTail(e.target.value.replace(/\s+/g, ""))}
+          value={tail}
+        />
         <Flex>
           <Button onClick={onFindAcft} w="40" colorScheme="blue" mb="4">
             Найти
